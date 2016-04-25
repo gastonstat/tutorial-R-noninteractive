@@ -12,9 +12,7 @@ output: html_document
 ------
 
 __Pre-requisites:__ This tutorial assumes you are familiar with 
-the command line and how to navigate your file-system. If this not your
-case, you should start checkcing this other tutorial about 
-Getting Started with the Command Line
+the command line and how to navigate your file-system.
 
 ------
 
