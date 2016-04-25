@@ -1,0 +1,5 @@
+# mac stuff
+.DS_Store
+
+# R CMD BATCH output files
+*.Rout

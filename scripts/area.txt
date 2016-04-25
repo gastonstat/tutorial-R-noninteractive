@@ -1,0 +1,10 @@
+#!/usr/bin/env Rscript
+
+len <- 3
+width <- 5
+area <- len * width
+
+cat("Area of a rectangle:\n")
+cat("length = ", len, "\n")
+cat("width  = ", width, "\n")
+cat("area   = ", area, "\n")

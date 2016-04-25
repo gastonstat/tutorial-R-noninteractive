@@ -1,0 +1,193 @@
+---
+title: "Running R in Batch mode"
+header-includes: \usepackage{float}
+output: html_document
+---
+
+> ### Learning Objectives:
+> - Invoking and running R in match mode
+> - Understand the command `R CMD BATCH`
+> - Execute some scripts
+
+------
+
+## R CMD
+
+R provides an special kind of command called `R CMD` which should be executed
+from the command line. This command is an interface or wrapper to various 
+__R tools__ such as processing files in R documentation format, or 
+manipulating add-on packages. These tools are useful in conjunction with R, 
+but not intended to be called  "directly". The main source of reference to 
+know more about `R CMD` is the R manual
+[An Introduction to R](https://cran.r-project.org/doc/manuals/r-release/R-intro.html)
+
+The general form is:
+```bash
+R CMD command options args
+```
+
+- `command` is the name of the tool
+- `options` are the command line options of `R`
+- `args` refers to the arguments passed on to the `command`
+
+Some of the relevant options for this tutorial are:
+
+- `--save` saves data sets at the end of the R session.
+- `--no-save` does not save data sets at the end of the R session.
+- `--no-environ` don't read any user file to set environment variables.
+- `--restore` restores `.RData` file in the directory where R was started
+- `--vanilla` combines `--no-save`, `--no-environ`, `--no-site-file`, 
+`--no-init-file` and `--no-restore`
+- `--quiet`, `--silent`, and `-q` don't print out the initial copyright and welcome messages
+- `--slave` makes R run as quietly as possible.
+
+
+### R CMD BATCH
+
+Among the several available R tools, the one that we are interested in is the
+`BATCH` tool, which is designed to run R in batch mode, that is, batch
+execution of R.
+
+When you run `R CMD BATCH`, the default options are `--restore --save`
+
+To see more information, check the manual documentation by typing
+`?BATCH` (or `help(BATCH)`) from within an R interactive session. Or by 
+typing `R CMD BATCH --help` from the command line.
+
+The usage is as follows:
+```bash
+R CMD BATCH options infile outfile
+```
+
+- `options` are optional _options_ from the command R
+- `infile` is the required input file with the code to be executed
+- `outfile` is the name of an optional output file. If no output file
+is provided, the name of `infile` is taken as default, appending
+the extension `.Rout` to it.
+
+
+
+a series of commands under the label `R CMD NAME` where NAME is
+the name of a series of available commands.
+
+
+
+## Running a script
+
+The file `myscript1.R` runs a simple script file. It requires no arguments.
+If you take a look at its contents, this script generates two vectors `x`
+and `y` of length 20. It fits a regression line (regressing `y` on `x`).
+Then it produces two plots: 1) a scatterplot with the fitted regression line, 
+and 2) a residual plot. Both plots are saved as png images.
+
+```bash
+R CMD BATCH myscript1.R
+```
+
+The file `myscript1.R` is the __input__ file.
+
+`R CMD BATCH` generates an output file. By default, this file has the same
+name as the input file, but its extension will be `.Rout`. In other words,
+the output of `R CMD BATCH` always goes to a file that is built with name
+of the input filename and appending `out`. However, you can provide a different
+name if you want so. 
+
+If you run the previous command, you should be able to see a file
+called `myscript1.Rout`. If you open this file, you will see the commands
+that were executed, together with the execution time.
+
+
+`R CMD BATCH` has default options `--restore --save --no-readline`
+
+The contents of the output file can be modified with a couple of options:
+
+- `R CMD BATCH --silent`
+- `R CMD BATCH --no-save`
+- `R CMD BATCH --vanilla`
+
+
+
+## Passing arguments to a script
+
+The file `myscript2.R` reads in a parameter for `n` which is the number of
+values to generate the x-y data.
+Instead of generating the vectors of a given length, it would be nice if the
+user could specify a different length for `n`. The file `myscript2.R` 
+allows the user to pass a value for the argument `n`.
+
+How to run an R script in batch mode and passing argument?
+You can pass parameters to scripts via additional arguments on the command line.
+This is done by quoting the arguments using the `--args` option:
+
+```
+R CMD BATCH "--args arg1 arg2" myscript.R 
+```
+
+Let's say we want to generate 50 values. Here's how to pass this number:
+```bash
+R CMD BATCH "--args 50" myscript2.R
+```
+
+The `R CMD BATCH` command has a lot of options you could
+specify, mostly manipulating how your R session is configured.
+
+| Option | Description |
+|------------|-------------|
+| `--quiet`  | Dont' print out the initial copyright and welcome messages
+| `--silent` | Dont' print out the initial copyright and welcome messages
+| `-q`       | Dont' print out the initial copyright and welcome messages
+| `--slave`  | Make R run as quietly as possible. It implies `--quiet` and `--no-save`
+
+For instance, the `--no-save` option tells R NOT to save your
+workspace at the end of this script.
+
+-----------------------------------------------------------
+
+## Batch Execution of R
+
+Run R in batch mode. `R CMD BATCH` runs R non-interactively with input from 
+infile and send output (`stdout/stderr`) to another file.
+
+In R, type `?BATCH` to get more info.
+From the command line,  to be reminded of the usage type the following:
+```bash
+R CMD BATCH --help
+```
+
+The generic execution form is as follows:
+```bash
+R CMD BATCH [options] infile [outfile]
+```
+where:
+
+- `[options]` are different options
+- `infile` is the name of the input file
+- `[outfile]` is an optional name for the output file
+
+
+
+
+-----------------------------------------------------------
+
+## From "R in a Nutshell"
+
+One way to run R in batch mode is from the system command line 
+(not the R console). By running R from the system command line, 
+it's possible to run a set of commands without starting R. 
+This makes it easier to automate analyses, as you can change a couple of 
+variables and rerun an analysis. For example, to load a set of commands 
+from the file generate_graphs.R, you would use a command like this:
+
+```bash
+R CMD BATCH generate_graphs.R
+```
+
+R would run the commands in the input file generate_graphs.R, 
+generating an output file called generate_graphs.Rout with the results. 
+You can also specify the name of the output file. For example, to put the 
+output in a file labeled with today’s date (on a Mac or Unix system), 
+you could use a command like this:
+
+```bash
+R CMD BATCH generate_graphs.R generate_graphs_`date "+%y%m%d"`.lo
+```

@@ -1,0 +1,6 @@
+#!/usr/bin/env Rscript
+hello_world <- function(){
+   cat("Hello, I'm an R script!\n")
+}
+
+hello_world()
