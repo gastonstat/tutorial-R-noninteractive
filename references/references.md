@@ -12,6 +12,10 @@ Batch Jobs and other topics (By Duncan Temple Lang)
 http://www.stat.berkeley.edu/~nolan/stat133/Fall05/lectures/RMemoryDebugging.pdf
 
 
+Running Jobs in the Background
+http://streaming.stat.iastate.edu/wiki/index.php/Running_Jobs_in_the_Background
+
+
 Passing arguments to an R script from command lines
 http://tuxette.nathalievilla.org/?p=1696
 
