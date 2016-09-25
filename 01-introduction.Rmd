@@ -65,7 +65,7 @@ the next to create a sequence of events.
 [Batch processing](https://en.wikipedia.org/wiki/Batch_processing), 
 also known as batch jobs, is the execution of one or more programs 
 on a computer environment without manual intervention.
-Batch processeing implies that all data and commands are passed through 
+Batch processing implies that all data and commands are passed through 
 scripts and/or command-line parameters and therefore run to completion 
 without human contact.
 The reason why this way of working is known as "batch processing" or 
@@ -105,7 +105,7 @@ and running scripts in a non-interactive way.
 
 ### Motivation
 
-Consider a stats professor that has a dataset the information of a 
+Consider a stats professor that has a dataset with the information of a 
 gradebook in one her classes. For instance, the 
 gradebook has variables for attendance, homework assignments, tests,
 and grade. Here's what the data table could lool like:
@@ -182,7 +182,7 @@ button.
 to edit `Variable value` so that it also contains the path to the directory
 where the various R binaries (programs) are installed.
 3. The path to this file is found in Windows explorer by looking for the
-directories were R was installed. STypically the path is something like
+directories were R was installed. Typically the path is something like
 `C:\Program Files\R\R-2.15.1\bin\x64`
 and it should be appended to the already existing path in `Variable
 value`.
@@ -190,7 +190,8 @@ value`.
 semi–colon so you should add an initial `;` to the string characters that
 you append to `Variable value`.
 
-In to `R.exe`, there are also two more versions: `Rcmd.exe` and `Rscript.exe`.
+In addition to `R.exe`, there are also two more versions: `Rcmd.exe` and 
+`Rscript.exe`.
 
 
 ### Mac and command line
@@ -198,7 +199,7 @@ In to `R.exe`, there are also two more versions: `Rcmd.exe` and `Rscript.exe`.
 In Mac, you can find the _terminal_ under the `Utilities` folder which is
 inside the `Applications` folder. If you are using the _Finder_, click 
 on the folder `Applications`, and then click on `Utilities`. There you should
-be able to find an black screen icon called __Terminal__. Click on it
+be able to find a black screen icon called __Terminal__. Click on it
 and you will have a new window opened where you can start typing commands.
 
 Type `R` in the terminal to make sure that the systems knows where R
