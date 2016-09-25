@@ -35,7 +35,7 @@ Rscript [options] [-e expr [-e expr2 ...] | file] [args]
 
 - `options` are options beginning with double dash `--`. These can be any of 
 the standard `R` front-end.
-- `expr` (fruther epressoins `expr2 ...`) refers to any R expression, and must be properly quoted
+- `expr` (further expressions `expr2 ...`) refers to any R expression, and must be properly quoted
 - `file` is the name of the input file containing R commands
 - `args` are arguments to be passed to the script in `file`
 
