@@ -121,7 +121,7 @@ and running scripts in a non-interactive way.
 ### Motivation
 
 Consider a stats professor that has a dataset with the information of a 
-gradebook in one her classes. For instance, the 
+gradebook in one of her classes. For instance, the 
 gradebook has variables for attendance, homework assignments, tests,
 and grade. Here's what the data table could look like:
 
