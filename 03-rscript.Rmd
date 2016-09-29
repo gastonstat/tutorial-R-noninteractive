@@ -81,7 +81,7 @@ Rscript -e 'paste("the time is", substr(date(), 12, 19))'
 
 -----
 
-### Using Rscript with script files
+### Using `Rscript` with R script files
 
 `Rscript` can be used to execute files with R code. If the script file
 to be run does not require the user to pass arguments, then you can 
@@ -93,19 +93,28 @@ Rscript myscript.R
 
 Another alternative is to call the `source()` function via an expression
 with the `-e` flag (be careful with the quotes):
+
 ```bash
 Rscript -e 'source("myscript.R")'
 ```
 
 Here's one example of how to render an `.Rmd` (R markdown) file from the
-command line:
+command line (again, be careful with the quotes):
+
 ```bash
 Rscript -e 'library(rmarkdown); render("document.Rmd")'
 ```
 
+Here's the same command as above, but now swaping the types of quotes:
+
+```bash
+Rscript -e "library(rmarkdown); render('document.Rmd')"
+```
+
+
 ------
 
-## Passing arguments to Rscript
+## Passing arguments to `Rscript`
 
 Some times you want to provide arguments that will be passed to the 
 input file. The way to invoke `Rscript` and passing arguments is like this:

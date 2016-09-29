@@ -170,19 +170,21 @@ Rscript -e 'paste(&quot;today is&quot;, substr(date(), 1, 10), substr(date(), 21
 Rscript -e 'paste(&quot;the time is&quot;, substr(date(), 12, 19))'</code></pre>
 <hr />
 </div>
-<div id="using-rscript-with-script-files" class="section level3">
-<h3>Using Rscript with script files</h3>
+<div id="using-rscript-with-r-script-files" class="section level3">
+<h3>Using <code>Rscript</code> with R script files</h3>
 <p><code>Rscript</code> can be used to execute files with R code. If the script file to be run does not require the user to pass arguments, then you can run it in several ways:</p>
 <pre class="bash"><code>Rscript myscript.R</code></pre>
 <p>Another alternative is to call the <code>source()</code> function via an expression with the <code>-e</code> flag (be careful with the quotes):</p>
 <pre class="bash"><code>Rscript -e 'source(&quot;myscript.R&quot;)'</code></pre>
-<p>Here’s one example of how to render an <code>.Rmd</code> (R markdown) file from the command line:</p>
+<p>Here’s one example of how to render an <code>.Rmd</code> (R markdown) file from the command line (again, be careful with the quotes):</p>
 <pre class="bash"><code>Rscript -e 'library(rmarkdown); render(&quot;document.Rmd&quot;)'</code></pre>
+<p>Here’s the same command as above, but now swaping the types of quotes:</p>
+<pre class="bash"><code>Rscript -e &quot;library(rmarkdown); render('document.Rmd')&quot;</code></pre>
 <hr />
 </div>
 </div>
 <div id="passing-arguments-to-rscript" class="section level2">
-<h2>Passing arguments to Rscript</h2>
+<h2>Passing arguments to <code>Rscript</code></h2>
 <p>Some times you want to provide arguments that will be passed to the input file. The way to invoke <code>Rscript</code> and passing arguments is like this:</p>
 <pre class="bash"><code>Rscript script_file.R arg1 arg2</code></pre>
 <ul>
