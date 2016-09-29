@@ -23,7 +23,8 @@ Most people working with R do so in _interactive mode_, either through RStudio
 line. In this mode, you type commands, and you get the outputs in return. 
 In other words, you __interact__ with R via its console, establishing a 
 dialogue between you and R.
-Alternatively, you can execute R in _non-interactive_ mode, sometimes also
+
+Alternatively, you can also execute R in __non-interactive__ mode, sometimes also
 referred to as _batch mode_. In this case, the computations are performed
 by executing scripts via the command line---without opening an R session.
 
@@ -36,6 +37,10 @@ calculating descriptive statistics that summarize the data, fitting various
 models to find the most appropriate parameters, and in general carrying out
 ad-hoc analyses and playing with new analysis ideas.
 
+Interactive mode is also useful when you are working in _developer mode_, 
+that is, writing code for analysis, writing functions, creating an R package, 
+working on a dynamic document, etc.
+
 As you become more and more familiar with a dataset, and as you advance 
 in your analysis workflow, you'll find yourself executing certain tasks 
 over and over again. For instance, reading a table, subsetting part of it,
@@ -44,20 +49,28 @@ These type of repetitive actions are good candidates to be encapsulated
 in a script that can be run without manual intervention. For this type
 of situations you can use R in non-interactive mode.
 
+Another typical situation for switching from interactive to non-interactive
+mode is when running simulations. Once the code of your simulations is ready,
+you can run the script from the command line, letting the computer do the
+work while you work on other tasks (or go out for a walk, drink a coffee, 
+watch youtube, etc).
+
+Likewise, non-interactive mode is what you probably will be using when
+automating your analysis and/or generating reports (e.g. papers, thesis, 
+dissertation).
+
 
 ### What is an Interactive Session?
+
+Let's talk a bit about interactive sessions in general, regardless of the
+type of program you are using (e.g. R, python, matlab, julia).
 
 Interactive sessions prompt the user for input as data or commands. 
 Typically, in an interactive session there is a software running on a 
 computer environment and accepts input from human. This is the simplest 
-way to work on any system---you simply log on and run whatever commands 
-you need to, whether on the command line or in a graphical environment 
-and you log out when you're done.
-
-An interactive session starts when you sign on to the system and ends 
-when you sign off the system. During the session, you interact with the system. 
-You enter commands and the software acts to each entry and then moves on to 
-the next to create a sequence of events.
+way to work on any system---you enter commands and the software acts to each 
+entry and then moves on to the next to create a sequence of events. 
+The interactive session ends when you log off the system.
 
 
 ### What is Batch Processing?
@@ -68,6 +81,7 @@ on a computer environment without manual intervention.
 Batch processing implies that all data and commands are passed through 
 scripts and/or command-line parameters and therefore run to completion 
 without human contact.
+
 The reason why this way of working is known as "batch processing" or 
 "batch job" is because the input data are collected into batches of files 
 and are processed in batches by the program. Often, batch jobs are 
@@ -79,7 +93,8 @@ submitted to a job scheduler and run on the first available compute node(s).
 
 R can be run in non-interactive mode in several ways. All of them involve
 working from the command line or some terminal emulator. In Mac systems,
-you use the __terminal__. In Windows systems you use the __command prompt__.
+you use the __terminal__. In Windows systems you use the __command prompt__,
+or _PowerShell_, or any other shell alternative (e.g. GitBash, Cygwin).
 
 Assuming that you have an R script file `myscript.R` that will 
 be executed non-interactively, you can use one of the following options:
@@ -108,7 +123,7 @@ and running scripts in a non-interactive way.
 Consider a stats professor that has a dataset with the information of a 
 gradebook in one her classes. For instance, the 
 gradebook has variables for attendance, homework assignments, tests,
-and grade. Here's what the data table could lool like:
+and grade. Here's what the data table could look like:
 
 | id | attend |	hw     | test1 | test2 | test3 | grade |
 |----|--------|------- |-------|-------|-------| ----- |
@@ -128,11 +143,13 @@ time after a test has taken place.
 The professor has an R script `tests_histograms.R` that reads in the dataset
 containing the gradebook scores, selects the variables of the test scores,
 and plots histograms for each test; something like this:
+
 ```{r, eval = FALSE}
 # script to generate histograms of test's
 dat <- read.csv('gradebook.csv')
 
 test_columns <- grep('test', names(dat))
+
 for (i in seq_along(test_columns)) {
 	png(paste0('histogram_test', i))
 	hist(dat[ ,i], main = paste('Test', names(dat)[i]))
@@ -145,8 +162,9 @@ from within RStudio, and get the plots. This is a repetitive task that can be
 automated. It would be better not to have to open RStudio, avoiding to manually
 run pieces of the script everytime.
 
-How can she "automate" this task? One way to run this script wihtout opening an interactive session, is using the
-`Rscript` command via the command line: 
+How can she "automate" this task? One way to run this script wihtout opening 
+an interactive session, is using the `Rscript` command via the command line: 
+
 ```bash
 Rscript -e 'tests_histograms.R'
 ```
