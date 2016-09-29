@@ -160,74 +160,93 @@ $(document).ready(function () {
 <li><code>infile</code> is the required input file with the code to be executed</li>
 <li><code>outfile</code> is the name of an optional output file. If no output file is provided, the name of <code>infile</code> is taken as default, appending the extension <code>.Rout</code> to it.</li>
 </ul>
-<p>a series of commands under the label <code>R CMD NAME</code> where NAME is the name of a series of available commands.</p>
 </div>
 </div>
 <div id="running-a-script" class="section level2">
 <h2>Running a script</h2>
-<p>The file <code>myscript1.R</code> runs a simple script file. It requires no arguments. If you take a look at its contents, this script generates two vectors <code>x</code> and <code>y</code> of length 20. It fits a regression line (regressing <code>y</code> on <code>x</code>). Then it produces two plots: 1) a scatterplot with the fitted regression line, and 2) a residual plot. Both plots are saved as png images.</p>
+<p>Consider the file <code>myscript1.R</code> (inside the folder <code>scripts/</code>). If you take a look at its contents, this script generates two vectors <code>x</code> and <code>y</code> of length 20. It fits a regression line (regressing <code>y</code> on <code>x</code>). Then it produces two plots: 1) a scatterplot with the fitted regression line, and 2) a residual plot. Both plots are saved as png images.</p>
+<p>To run the code inside <code>myscript1.R</code> in batch mode, you have type the following commands from the command line:</p>
 <pre class="bash"><code>R CMD BATCH myscript1.R</code></pre>
 <p>The file <code>myscript1.R</code> is the <strong>input</strong> file.</p>
-<p><code>R CMD BATCH</code> generates an output file. By default, this file has the same name as the input file, but its extension will be <code>.Rout</code>. In other words, the output of <code>R CMD BATCH</code> always goes to a file that is built with name of the input filename and appending <code>out</code>. However, you can provide a different name if you want so.</p>
-<p>If you run the previous command, you should be able to see a file called <code>myscript1.Rout</code>. If you open this file, you will see the commands that were executed, together with the execution time.</p>
+<p><code>R CMD BATCH</code> generates an output file. By default, this file has the same name as the input file, but its extension will be <code>.Rout</code>. In other words, the output of <code>R CMD BATCH</code> always goes to a file that is built with name of the input filename and appending <code>out</code>. For this particular example, the output file will be <code>myscript1.Rout</code>. However, you can provide a different name if you want so.</p>
+<pre class="bash"><code># specifying the name of the output file
+R CMD BATCH myscript1.R myscript1-output.R</code></pre>
+<p>If you run the command <code>R CMD BATCH myscript1.R</code>, you should be able to see a file called <code>myscript1.Rout</code>. If you open this file, you will see the welcome message that appears everytime you open a new session in R, followed by the R commands (i.e. R code) that were executed, and finally an additional command at the end of the file with information about the execution time:</p>
+<pre><code>
+R version 3.3.1 (2016-06-21) -- &quot;Bug in Your Hair&quot;
+Copyright (C) 2016 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+&gt; # Regression analysis of two random vectors
+&gt; 
+&gt; # random data
+&gt; x &lt;- rnorm(20)
+&gt; y &lt;- x + rnorm(20)
+&gt; 
+&gt; # regression line
+&gt; reg &lt;- lm(y ~ x)
+&gt; 
+&gt; # scatter diagram with fitted regression line
+&gt; png('scatterplot.png')
+&gt; plot(x, y, las = 1, pch = 19, col = &quot;#555555&quot;)
+&gt; abline(reg, col = &quot;#0000DD59&quot;, lwd = 2)
+&gt; dev.off()
+null device 
+          1 
+&gt; 
+&gt; # residuals plot
+&gt; png('residuals_plot.png')
+&gt; plot(x, reg$residuals, las = 1, pch = 19, col = &quot;#606060&quot;)
+&gt; abline(h = 0)
+&gt; dev.off()
+null device 
+          1 
+&gt; 
+&gt; proc.time()
+   user  system elapsed 
+  0.179   0.036   0.210 
+</code></pre>
+<p>Notice that the R code inside the output file is displayed with the prompt character <code>&gt;</code>.</p>
+<hr />
 <p><code>R CMD BATCH</code> has default options <code>--restore --save --no-readline</code></p>
-<p>The contents of the output file can be modified with a couple of options:</p>
 <ul>
-<li><code>R CMD BATCH --silent</code></li>
-<li><code>R CMD BATCH --no-save</code></li>
-<li><code>R CMD BATCH --vanilla</code></li>
+<li><code>--save</code> saves all the objects in the workspace (i.e. all the objects created while the script was executed) into a hidden file <code>.RData</code> which is a file in R’s binary format. When you save the available objects, this is known as saving the <code>image</code> (see <code>help(save)</code> for more information).</li>
+<li><code>--restore</code> will load the saved images, that is, will <code>load()</code> the content of the file <code>.RData</code> in the directory where R was started.</li>
+<li><code>--no-readline</code> turns off command-line editing via <code>readline</code>. This option is not that important.</li>
 </ul>
+<p>If you don’t want <code>R CMD BATCH</code> to save the image, use the option <code>--no-save</code>. Likewise, if you don’t want <code>R CMD BATCH</code> to load the objects in <code>.RData</code> use <code>--no-restore</code>.</p>
+<p>You can further modify the contents of the output file with a couple of additional options:</p>
+<ul>
+<li><code>R CMD BATCH --silent</code> won’t print out the initial copyright and welcome messages.</li>
+<li><code>R CMD BATCH --no-save</code> won’t save the workspace image (i.e. no <code>.RData</code> will be saved).</li>
+<li><code>R CMD BATCH --vanilla</code> combines <code>--no-save</code>, <code>--no-environ</code>, <code>--no-site-file</code>, <code>--no-init-file</code> and <code>--no-restore</code>.</li>
+</ul>
+<hr />
 </div>
 <div id="passing-arguments-to-a-script" class="section level2">
 <h2>Passing arguments to a script</h2>
-<p>The file <code>myscript2.R</code> reads in a parameter for <code>n</code> which is the number of values to generate the x-y data. Instead of generating the vectors of a given length, it would be nice if the user could specify a different length for <code>n</code>. The file <code>myscript2.R</code> allows the user to pass a value for the argument <code>n</code>.</p>
+<p>In <code>script1.R</code>, the number of random values used to create vectors <code>x</code> and <code>y</code> was fixed. However, it would be nice if the user could specify a a value of <code>n</code> to control the length of the random numbers. In other words, it would be nice if we could specify a value for an argument <code>n</code> that we could pass it to the script file.</p>
+<p>When running R scripts, often you will want to provide values for certain arguments. Luckily, <code>R CMD BATCH</code> allows you specify arguments and pass them to the script.</p>
 <p>How to run an R script in batch mode and passing argument? You can pass parameters to scripts via additional arguments on the command line. This is done by quoting the arguments using the <code>--args</code> option:</p>
 <pre><code>R CMD BATCH &quot;--args arg1 arg2&quot; myscript.R </code></pre>
+<p>To see an example, take a look at the file <code>myscript2.R</code> which is almost identical to <code>myscript1.R</code>. The difference is that <code>myscript2.R</code> reads in a parameter for <code>n</code> which is the number of values to generate the x-y coordinates for the scatterplot.</p>
 <p>Let’s say we want to generate 50 values. Here’s how to pass this number:</p>
 <pre class="bash"><code>R CMD BATCH &quot;--args 50&quot; myscript2.R</code></pre>
-<p>The <code>R CMD BATCH</code> command has a lot of options you could specify, mostly manipulating how your R session is configured.</p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Option</th>
-<th align="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><code>--quiet</code></td>
-<td align="left">Dont’ print out the initial copyright and welcome messages</td>
-</tr>
-<tr class="even">
-<td align="left"><code>--silent</code></td>
-<td align="left">Dont’ print out the initial copyright and welcome messages</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>-q</code></td>
-<td align="left">Dont’ print out the initial copyright and welcome messages</td>
-</tr>
-<tr class="even">
-<td align="left"><code>--slave</code></td>
-<td align="left">Make R run as quietly as possible. It implies <code>--quiet</code> and <code>--no-save</code></td>
-</tr>
-</tbody>
-</table>
-<p>For instance, the <code>--no-save</code> option tells R NOT to save your workspace at the end of this script.</p>
 <hr />
-</div>
-<div id="batch-execution-of-r" class="section level2">
-<h2>Batch Execution of R</h2>
-<p>Run R in batch mode. <code>R CMD BATCH</code> runs R non-interactively with input from infile and send output (<code>stdout/stderr</code>) to another file.</p>
-<p>In R, type <code>?BATCH</code> to get more info. From the command line, to be reminded of the usage type the following:</p>
-<pre class="bash"><code>R CMD BATCH --help</code></pre>
-<p>The generic execution form is as follows:</p>
-<pre class="bash"><code>R CMD BATCH [options] infile [outfile]</code></pre>
-<p>where:</p>
-<ul>
-<li><code>[options]</code> are different options</li>
-<li><code>infile</code> is the name of the input file</li>
-<li><code>[outfile]</code> is an optional name for the output file</li>
-</ul>
 </div>
 
 
