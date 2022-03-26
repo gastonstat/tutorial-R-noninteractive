@@ -1,10 +1,11 @@
 ---
 title: "Running R non-interactively"
 header-includes: \usepackage{float}
-output: html_document
+output: github_document
 ---
 
 > ### Learning Objectives:
+>
 > - Invoking and running R from the command line
 > - When to run R non-intereactively
 > - Invoking R from the command line
@@ -196,14 +197,17 @@ directory where `R.exe` is. To do so follow these steps:
 1. Open the _Control Panel_, choose `System`, click on `Advanced system
 settings` in the menue to the left and choose the `Environment variables`
 button.
+
 2. Choose the variable `Path` and click on the `Edit–button`. Now you have
 to edit `Variable value` so that it also contains the path to the directory
 where the various R binaries (programs) are installed.
+
 3. The path to this file is found in Windows explorer by looking for the
 directories were R was installed. Typically the path is something like
 `C:\Program Files\R\R-2.15.1\bin\x64`
 and it should be appended to the already existing path in `Variable
 value`.
+
 4. Note that the various paths in the search path as separated with a
 semi–colon so you should add an initial `;` to the string characters that
 you append to `Variable value`.

@@ -1,10 +1,11 @@
 ---
 title: "Running R in Batch mode"
 header-includes: \usepackage{float}
-output: html_document
+output: github_document
 ---
 
 > ### Learning Objectives:
+>
 > - Invoking and running R in match mode
 > - Understand the command `R CMD BATCH`
 > - Execute some scripts
@@ -22,23 +23,33 @@ know more about `R CMD` is the R manual
 [An Introduction to R](https://cran.r-project.org/doc/manuals/r-release/R-intro.html)
 
 The general form is:
+
 ```bash
 R CMD command options args
 ```
 
 - `command` is the name of the tool
+
 - `options` are the command line options of `R`
+
 - `args` refers to the arguments passed on to the `command`
+
 
 Some of the relevant options for this tutorial are:
 
 - `--save` saves data sets at the end of the R session.
+
 - `--no-save` does not save data sets at the end of the R session.
+
 - `--no-environ` don't read any user file to set environment variables.
+
 - `--restore` restores `.RData` file in the directory where R was started
+
 - `--vanilla` combines `--no-save`, `--no-environ`, `--no-site-file`, 
 `--no-init-file` and `--no-restore`
+
 - `--quiet`, `--silent`, and `-q` don't print out the initial copyright and welcome messages
+
 - `--slave` makes R run as quietly as possible.
 
 
@@ -55,12 +66,15 @@ To see more information, check the manual documentation by typing
 typing `R CMD BATCH --help` from the command line.
 
 The usage is as follows:
+
 ```bash
 R CMD BATCH options infile outfile
 ```
 
 - `options` are optional _options_ from the command R
+
 - `infile` is the required input file with the code to be executed
+
 - `outfile` is the name of an optional output file. If no output file
 is provided, the name of `infile` is taken as default, appending
 the extension `.Rout` to it.
@@ -98,7 +112,7 @@ R CMD BATCH myscript1.R myscript1-output.R
 
 If you run the command `R CMD BATCH myscript1.R`, you should be able to 
 see a file called `myscript1.Rout`. If you open this file, you will see 
-the welcome message that appears everytime you open a new session in R, 
+the welcome message that appears every time you open a new session in R, 
 followed by the R commands (i.e. R code) that were executed, and finally
 an additional command at the end of the file with information
 about the execution time:
@@ -166,8 +180,10 @@ prompt character `>`.
 a hidden file `.RData` which is a file in R's binary format. When you 
 save the available objects, this is known as saving the `image`
 (see `help(save)` for more information).
+
 - `--restore` will load the saved images, that is, will `load()` the
 content of the file `.RData` in the directory where R was started.
+
 - `--no-readline` turns off command-line editing via `readline`.
 This option is not that important.
 
@@ -180,8 +196,10 @@ of additional options:
 
 - `R CMD BATCH --silent` won't print out the initial copyright and 
 welcome messages.
+
 - `R CMD BATCH --no-save` won't save the workspace image 
 (i.e. no `.RData` will be saved).
+
 - `R CMD BATCH --vanilla` combines `--no-save`, `--no-environ`, 
 `--no-site-file`, `--no-init-file` and `--no-restore`.
 
