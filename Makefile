@@ -1,11 +1,18 @@
 RMDS = $(wildcard *.Rmd)
 HTMLS = $(patsubst %.Rmd,%.html,$(wildcard *.Rmd))
+GITS = $(patsubst %.Rmd,%.md,$(wildcard *.Rmd))
 
 
-all: $(HTMLS)
+#all: $(HTMLS)
+
+all: $(GITS)
 
 
-%.html: %.Rmd
+#%.html: %.Rmd
+#	Rscript -e "library(rmarkdown);render('$<')"
+
+
+%.md: %.Rmd
 	Rscript -e "library(rmarkdown);render('$<')"
 
 
