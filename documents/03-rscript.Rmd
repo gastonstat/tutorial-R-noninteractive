@@ -274,7 +274,7 @@ Rscript normal-distribution.R 0 1
 If you execute this script, the produced histogram will be saved in the file 
 `normal-histogram.png`
 
-![normal-histogram](images/normal-histogram.png)
+![normal-histogram](../images/normal-histogram.png)
 
 
 ### Using Rscript in shell scripts

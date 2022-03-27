@@ -1,27 +1,29 @@
 Using Rscript
 ================
 
-> ### Learning Objectives:
-> 
->   - Invoking and running Rscript
->   - Understand the command `Rscript`
->   - Execute some scripts
 
------
+
+> ### Learning Objectives:
+>
+> -   Invoking and running Rscript
+> -   Understand the command `Rscript`
+> -   Execute some scripts
+
+------------------------------------------------------------------------
 
 ## Command Rscript
 
 Another very useful and interesting way to run R in non-interactive mode
 is the command `Rscript`. This command is officially referred to as the
 **Scripting Front-End for R** because this is an alternative front end
-originally designed to be used in bash (\#\!) scripts and other
-scripting applications.
+originally designed to be used in bash (#!) scripts and other scripting
+applications.
 
-  - `Rscript` is the alternative front-end of `R CMD BATCH`
+-   `Rscript` is the alternative front-end of `R CMD BATCH`
 
-  - output goes to standard output (*stdout*)
+-   output goes to standard output (*stdout*)
 
-  - `Rscript` has default options `--slave --no-restore`
+-   `Rscript` has default options `--slave --no-restore`
 
 In R, you can check the help documentation with `help(Rscript)`. Also,
 you can consult the R manual [An Introduction to
@@ -34,15 +36,15 @@ The usage of `Rscript` has the following form:
 Rscript [options] [-e expr [-e expr2 ...] | file] [args]
 ```
 
-  - `options` are options beginning with double dash `--`. These can be
+-   `options` are options beginning with double dash `--`. These can be
     any of the standard `R` front-end.
 
-  - `expr` (further expressions `expr2 ...`) refers to any R expression,
+-   `expr` (further expressions `expr2 ...`) refers to any R expression,
     and must be properly quoted
 
-  - `file` is the name of the input file containing R commands
+-   `file` is the name of the input file containing R commands
 
-  - `args` are arguments to be passed to the script in `file`
+-   `args` are arguments to be passed to the script in `file`
 
 ### Executing simple expressions
 
@@ -87,7 +89,7 @@ Rscript -e 'paste("today is", substr(date(), 1, 10), substr(date(), 21, 24))'
 Rscript -e 'paste("the time is", substr(date(), 12, 19))'
 ```
 
------
+------------------------------------------------------------------------
 
 ### Using `Rscript` with R script files
 
@@ -119,7 +121,7 @@ Here’s the same command as above, but now swaping the types of quotes:
 Rscript -e "library(rmarkdown); render('document.Rmd')"
 ```
 
------
+------------------------------------------------------------------------
 
 ## Passing arguments to `Rscript`
 
@@ -131,11 +133,11 @@ this:
 Rscript script_file.R arg1 arg2
 ```
 
-  - The main command is `Rscript`.
+-   The main command is `Rscript`.
 
-  - The name of the input R file is `script_file.R`
+-   The name of the input R file is `script_file.R`
 
-  - Supplied arguments are: `arg1` and `arg2`
+-   Supplied arguments are: `arg1` and `arg2`
 
 ### Toy Example: Normal Vector
 
@@ -264,7 +266,7 @@ Rscript normal-distribution.R 0 1
 If you execute this script, the produced histogram will be saved in the
 file `normal-histogram.png`
 
-![normal-histogram](images/normal-histogram.png)
+![normal-histogram](../images/normal-histogram.png)
 
 ### Using Rscript in shell scripts
 
@@ -272,4 +274,4 @@ Besides invoking `Rscript` directly from the command line, there is
 another way to use it inside shell scripts. We’ll discuss this topic in
 the section `04-bash-script/`.
 
------
+------------------------------------------------------------------------
