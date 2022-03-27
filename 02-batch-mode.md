@@ -1,0 +1,233 @@
+Running R in Batch mode
+================
+
+> ### Learning Objectives:
+> 
+>   - Invoking and running R in match mode
+>   - Understand the command `R CMD BATCH`
+>   - Execute some scripts
+
+-----
+
+## R CMD
+
+R provides an special kind of command called `R CMD` which should be
+executed from the command line. This command is an interface or wrapper
+to various **R tools** such as processing files in R documentation
+format, or manipulating add-on packages. These tools are useful in
+conjunction with R, but not intended to be called “directly”. The main
+source of reference to know more about `R CMD` is the R manual [An
+Introduction to
+R](https://cran.r-project.org/doc/manuals/r-release/R-intro.html)
+
+The general form is:
+
+``` bash
+R CMD command options args
+```
+
+  - `command` is the name of the tool
+
+  - `options` are the command line options of `R`
+
+  - `args` refers to the arguments passed on to the `command`
+
+Some of the relevant options for this tutorial are:
+
+  - `--save` saves data sets at the end of the R session.
+
+  - `--no-save` does not save data sets at the end of the R session.
+
+  - `--no-environ` don’t read any user file to set environment
+    variables.
+
+  - `--restore` restores `.RData` file in the directory where R was
+    started
+
+  - `--vanilla` combines `--no-save`, `--no-environ`, `--no-site-file`,
+    `--no-init-file` and `--no-restore`
+
+  - `--quiet`, `--silent`, and `-q` don’t print out the initial
+    copyright and welcome messages
+
+  - `--slave` makes R run as quietly as possible.
+
+### R CMD BATCH
+
+Among the several available R tools, the one that we are interested in
+is the `BATCH` tool, which is designed to run R in batch mode, that is,
+batch execution of R.
+
+When you run `R CMD BATCH`, the default options are `--restore --save`
+
+To see more information, check the manual documentation by typing
+`?BATCH` (or `help(BATCH)`) from within an R interactive session. Or by
+typing `R CMD BATCH --help` from the command line.
+
+The usage is as follows:
+
+``` bash
+R CMD BATCH options infile outfile
+```
+
+  - `options` are optional *options* from the command R
+
+  - `infile` is the required input file with the code to be executed
+
+  - `outfile` is the name of an optional output file. If no output file
+    is provided, the name of `infile` is taken as default, appending the
+    extension `.Rout` to it.
+
+## Running a script
+
+Consider the file `myscript1.R` (inside the folder `scripts/`). If you
+take a look at its contents, this script generates two vectors `x` and
+`y` of length 20. It fits a regression line (regressing `y` on `x`).
+Then it produces two plots: 1) a scatterplot with the fitted regression
+line, and 2) a residual plot. Both plots are saved as png images.
+
+To run the code inside `myscript1.R` in batch mode, you have type the
+following commands from the command line:
+
+``` bash
+R CMD BATCH myscript1.R
+```
+
+The file `myscript1.R` is the **input** file.
+
+`R CMD BATCH` generates an output file. By default, this file has the
+same name as the input file, but its extension will be `.Rout`. In other
+words, the output of `R CMD BATCH` always goes to a file that is built
+with name of the input filename and appending `out`. For this particular
+example, the output file will be `myscript1.Rout`. However, you can
+provide a different name if you want so.
+
+``` bash
+# specifying the name of the output file
+R CMD BATCH myscript1.R myscript1-output.R
+```
+
+If you run the command `R CMD BATCH myscript1.R`, you should be able to
+see a file called `myscript1.Rout`. If you open this file, you will see
+the welcome message that appears every time you open a new session in R,
+followed by the R commands (i.e. R code) that were executed, and finally
+an additional command at the end of the file with information about the
+execution time:
+
+``` 
+
+R version 3.3.1 (2016-06-21) -- "Bug in Your Hair"
+Copyright (C) 2016 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # Regression analysis of two random vectors
+> 
+> # random data
+> x <- rnorm(20)
+> y <- x + rnorm(20)
+> 
+> # regression line
+> reg <- lm(y ~ x)
+> 
+> # scatter diagram with fitted regression line
+> png('scatterplot.png')
+> plot(x, y, las = 1, pch = 19, col = "#555555")
+> abline(reg, col = "#0000DD59", lwd = 2)
+> dev.off()
+null device 
+          1 
+> 
+> # residuals plot
+> png('residuals_plot.png')
+> plot(x, reg$residuals, las = 1, pch = 19, col = "#606060")
+> abline(h = 0)
+> dev.off()
+null device 
+          1 
+> 
+> proc.time()
+   user  system elapsed 
+  0.179   0.036   0.210 
+```
+
+Notice that the R code inside the output file is displayed with the
+prompt character `>`.
+
+-----
+
+`R CMD BATCH` has default options `--restore --save --no-readline`
+
+  - `--save` saves all the objects in the workspace (i.e. all the
+    objects created while the script was executed) into a hidden file
+    `.RData` which is a file in R’s binary format. When you save the
+    available objects, this is known as saving the `image` (see
+    `help(save)` for more information).
+
+  - `--restore` will load the saved images, that is, will `load()` the
+    content of the file `.RData` in the directory where R was started.
+
+  - `--no-readline` turns off command-line editing via `readline`. This
+    option is not that important.
+
+If you don’t want `R CMD BATCH` to save the image, use the option
+`--no-save`. Likewise, if you don’t want `R CMD BATCH` to load the
+objects in `.RData` use `--no-restore`.
+
+You can further modify the contents of the output file with a couple of
+additional options:
+
+  - `R CMD BATCH --silent` won’t print out the initial copyright and
+    welcome messages.
+
+  - `R CMD BATCH --no-save` won’t save the workspace image (i.e. no
+    `.RData` will be saved).
+
+  - `R CMD BATCH --vanilla` combines `--no-save`, `--no-environ`,
+    `--no-site-file`, `--no-init-file` and `--no-restore`.
+
+-----
+
+## Passing arguments to a script
+
+In `script1.R`, the number of random values used to create vectors `x`
+and `y` was fixed. However, it would be nice if the user could specify a
+a value of `n` to control the length of the random numbers. In other
+words, it would be nice if we could specify a value for an argument `n`
+that we could pass it to the script file.
+
+When running R scripts, often you will want to provide values for
+certain arguments. Luckily, `R CMD BATCH` allows you specify arguments
+and pass them to the script.
+
+How to run an R script in batch mode and passing argument? You can pass
+parameters to scripts via additional arguments on the command line. This
+is done by quoting the arguments using the `--args` option:
+
+    R CMD BATCH "--args arg1 arg2" myscript.R 
+
+To see an example, take a look at the file `myscript2.R` which is almost
+identical to `myscript1.R`. The difference is that `myscript2.R` reads
+in a parameter for `n` which is the number of values to generate the x-y
+coordinates for the scatterplot.
+
+Let’s say we want to generate 50 values. Here’s how to pass this number:
+
+``` bash
+R CMD BATCH "--args 50" myscript2.R
+```
+
+-----

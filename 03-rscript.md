@@ -1,0 +1,275 @@
+Using Rscript
+================
+
+> ### Learning Objectives:
+> 
+>   - Invoking and running Rscript
+>   - Understand the command `Rscript`
+>   - Execute some scripts
+
+-----
+
+## Command Rscript
+
+Another very useful and interesting way to run R in non-interactive mode
+is the command `Rscript`. This command is officially referred to as the
+**Scripting Front-End for R** because this is an alternative front end
+originally designed to be used in bash (\#\!) scripts and other
+scripting applications.
+
+  - `Rscript` is the alternative front-end of `R CMD BATCH`
+
+  - output goes to standard output (*stdout*)
+
+  - `Rscript` has default options `--slave --no-restore`
+
+In R, you can check the help documentation with `help(Rscript)`. Also,
+you can consult the R manual [An Introduction to
+R](https://cran.r-project.org/doc/manuals/r-release/R-intro.html) and
+read the section **Scripting with R**
+
+The usage of `Rscript` has the following form:
+
+``` bash
+Rscript [options] [-e expr [-e expr2 ...] | file] [args]
+```
+
+  - `options` are options beginning with double dash `--`. These can be
+    any of the standard `R` front-end.
+
+  - `expr` (further expressions `expr2 ...`) refers to any R expression,
+    and must be properly quoted
+
+  - `file` is the name of the input file containing R commands
+
+  - `args` are arguments to be passed to the script in `file`
+
+### Executing simple expressions
+
+One basic use of `Rscript` is to execute simple expressions using the
+flag `-e`. For example, to compute the sum `2 + 2`, type the following
+in the command line:
+
+``` bash
+Rscript -e '2 + 2'
+```
+
+You can run more than one expression using as many `-e` flags as
+expressions to be executed (make sure to properly quote them)
+
+``` bash
+Rscript -e '2 + 3' -e '2 * 3' -e '2 ^ 3'
+```
+
+You can also execute a compound expression with multiple commands
+separated with semicolons `;`
+
+``` bash
+Rscript -e '2 + 3; 2 * 3; 2 ^ 3'
+```
+
+Here are some more examples that you can try:
+
+``` bash
+# some math
+Rscript -e 'sqrt(81) + abs(-10) - sin(pi/2)'
+
+# some text
+Rscript -e 'sprintf("the girl spent $%s in books", 10)'
+
+# quadratic equation
+Rscript -e 'a=1; b=2; c=3; x=1; a*x^2 + b*x + c'
+
+# date
+Rscript -e 'paste("today is", substr(date(), 1, 10), substr(date(), 21, 24))'
+
+# time
+Rscript -e 'paste("the time is", substr(date(), 12, 19))'
+```
+
+-----
+
+### Using `Rscript` with R script files
+
+`Rscript` can be used to execute files with R code. If the script file
+to be run does not require the user to pass arguments, then you can run
+it in several ways:
+
+``` bash
+Rscript myscript.R
+```
+
+Another alternative is to call the `source()` function via an expression
+with the `-e` flag (be careful with the quotes):
+
+``` bash
+Rscript -e 'source("myscript.R")'
+```
+
+Here’s one example of how to render an `.Rmd` (R markdown) file from the
+command line (again, be careful with the quotes):
+
+``` bash
+Rscript -e 'library(rmarkdown); render("document.Rmd")'
+```
+
+Here’s the same command as above, but now swaping the types of quotes:
+
+``` bash
+Rscript -e "library(rmarkdown); render('document.Rmd')"
+```
+
+-----
+
+## Passing arguments to `Rscript`
+
+Some times you want to provide arguments that will be passed to the
+input file. The way to invoke `Rscript` and passing arguments is like
+this:
+
+``` bash
+Rscript script_file.R arg1 arg2
+```
+
+  - The main command is `Rscript`.
+
+  - The name of the input R file is `script_file.R`
+
+  - Supplied arguments are: `arg1` and `arg2`
+
+### Toy Example: Normal Vector
+
+Consider the hypothetical example of having a minimalist script
+`normal-vector.R` that generates a vector of normal random numbers—via
+the function `rnorm()`. This script could look like:
+
+``` r
+# vector of random numbers
+x <- rnorm(n, mean, sd)
+cat(x)
+```
+
+In this case, it would be nice if you can supply values for `n`, `mean`,
+and `sd` when executing the script. For instance, say you want `n` to be
+100, `mean` 5, and `sd` 1.5, you could invoke the script as:
+
+``` bash
+Rscript normal-vector.R 100 5 1.5
+```
+
+The folder `scripts/` does actually include such a `normal-vector.R`
+file for you to test (keep in mind that it is a toy script).
+
+### Extracting Supplied Arguments
+
+So how do you access any supplied arguments when calling `Rscript` from
+the command line? When you pass arguments to `Rscript`, these can be
+retrieved as a character vector with the `commandArgs()` function. For
+example, including a line like the one below inside the input file:
+
+``` r
+args <- commandArgs(trailingOnly = TRUE)
+```
+
+creates a character vector `args` that contains the supplied arguments.
+In other words, `commandArgs()` extracts the provided command line
+arguments.
+
+Let’s take a look at the code in the `normal-vector.R` example:
+
+``` r
+# reading arguments ('n', 'mean', 'sd')
+args <- commandArgs(trailingOnly = TRUE)
+
+n <- as.numeric(args[1])
+mean <- as.numeric(args[2])
+sd <- as.numeric(args[3])
+
+x <- rnorm(n, mean, sd)
+cat(x, '\n')
+```
+
+As you can tell from the snippet above, `commandArgs(TRUE)` returns a
+character vector with the supplied arguments. These values can then be
+accessed individually (e.g. `args[1]`). Because the arguments are in the
+form of a character vector, it’s good practice to convert them into
+numbers with `as.numeric()`.
+
+### More about `commandArgs()`
+
+The function `commandArgs()` takes a logical parameter called
+`trailingOnly`. If you use the parameter `trailingOnly = FALSE` inside
+`commandArgs()`, the character vector of arguments will include the
+default options of calling `Rscript`. For instance, the file
+`show-args.R` in the `sripts/` folder consists of the following code:
+
+``` r
+args <- commandArgs(trailingOnly = FALSE)
+
+for (i in 1:length(args)) {
+    cat(args[i], '\n')
+}
+```
+
+which will print all the supplied arguments (even the default ones).
+When you execute `show-args.R` from the command line without supplying
+any arguments, you should be able to see an output like the following
+one:
+
+``` bash
+Rscript show-args.R
+```
+
+    /Library/Frameworks/R.framework/Resources/bin/exec/R 
+    --slave 
+    --no-restore 
+    --file=show-args.R 
+
+as you can tell, the output shows four arguments: the first one refers
+to the location of the executable R; the other values (`--slave`,
+`--no-restore`, and `--file=show-args.R`) are the default options when
+calling `Rscript`.
+
+### Excluding default options as arguments
+
+To exclude the default (“non-relevant”) arguments, you have to use
+`commandArgs(trailingOnly = TRUE)`. The `scripts/` folder of this
+tutorial contains the script `listing-args.R`. This is a simple R script
+that reads any provided arguments, and displays the number of arguments
+as well as their values. You can try it like so:
+
+``` bash
+# no arguments provided
+Rscript listing-args.R
+
+# one argument provided
+Rscript listing-args.R 10
+
+# various arguments provided
+Rscript listing-args.R 1 a TRUE NA yes
+```
+
+### Example: Normal Histogram
+
+Our last example will consider the R script `normal-distribution.R` that
+produces a histogram from a randomly generated vector. If you look at
+the code in `normal-histogram.R`, you’ll see that the generated vector
+has length 1000. Since the vector has a fixed size, we just need to pass
+arguments for `mean`, and `sd`:
+
+``` bash
+Rscript normal-distribution.R 0 1
+```
+
+If you execute this script, the produced histogram will be saved in the
+file `normal-histogram.png`
+
+![normal-histogram](images/normal-histogram.png)
+
+### Using Rscript in shell scripts
+
+Besides invoking `Rscript` directly from the command line, there is
+another way to use it inside shell scripts. We’ll discuss this topic in
+the section `04-bash-script/`.
+
+-----

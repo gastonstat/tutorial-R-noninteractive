@@ -1,0 +1,61 @@
+Redirection
+================
+
+> ### Learning Objectives:
+> 
+>   - Invoking and running R scripts with redirection
+>   - Execute some scripts
+
+-----
+
+## Redirection
+
+Another way to execute R scripts in the command line is with the `R`
+command and the redirection operator `<`.
+
+Consider the file `myscript1.R` in the `scripts/` directory. This file
+generates two random vectors, fitting a regression line, and generates
+two plots:
+
+``` r
+# Regression analysis of two random vectors
+
+# random data
+x <- rnorm(20)
+y <- x + rnorm(20)
+
+# regression line
+reg <- lm(y ~ x)
+
+# scatter diagram with fitted regression line
+png('scatterplot.png')
+plot(x, y, las = 1, pch = 19, col = "#555555")
+abline(reg, col = "#0000DD59", lwd = 2)
+dev.off()
+
+# residuals plot
+png('residuals_plot.png')
+plot(x, reg$residuals, las = 1, pch = 19, col = "#606060")
+abline(h = 0)
+dev.off()
+```
+
+Here’s how to execute this script in the command line with a redirection
+operator:
+
+``` bash
+R --vanilla < myscript1.R
+```
+
+-----
+
+## Passing arguments
+
+You can also pass arguments with the `--args` options of the `R`
+command:
+
+``` bash
+R --vanilla --args 10 5 2 < normal-vector.R
+```
+
+-----

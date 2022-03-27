@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style type="text/css">
+@font-face {
+font-family: octicons-link;
+src: url(data:font/woff;charset=utf-8;base64,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) format('woff');
+}
+body {
+-webkit-text-size-adjust: 100%;
+text-size-adjust: 100%;
+color: #333;
+font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+font-size: 16px;
+line-height: 1.6;
+word-wrap: break-word;
+}
+a {
+background-color: transparent;
+}
+a:active,
+a:hover {
+outline: 0;
+}
+strong {
+font-weight: bold;
+}
+h1 {
+font-size: 2em;
+margin: 0.67em 0;
+}
+img {
+border: 0;
+}
+hr {
+box-sizing: content-box;
+height: 0;
+}
+pre {
+overflow: auto;
+}
+code,
+kbd,
+pre {
+font-family: monospace, monospace;
+font-size: 1em;
+}
+input {
+color: inherit;
+font: inherit;
+margin: 0;
+}
+html input[disabled] {
+cursor: default;
+}
+input {
+line-height: normal;
+}
+input[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-collapse: collapse;
+border-spacing: 0;
+}
+td,
+th {
+padding: 0;
+}
+* {
+box-sizing: border-box;
+}
+input {
+font: 13px / 1.4 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+a {
+color: #4078c0;
+text-decoration: none;
+}
+a:hover,
+a:active {
+text-decoration: underline;
+}
+hr {
+height: 0;
+margin: 15px 0;
+overflow: hidden;
+background: transparent;
+border: 0;
+border-bottom: 1px solid #ddd;
+}
+hr:before {
+display: table;
+content: "";
+}
+hr:after {
+display: table;
+clear: both;
+content: "";
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 15px;
+margin-bottom: 15px;
+line-height: 1.1;
+}
+h1 {
+font-size: 30px;
+}
+h2 {
+font-size: 21px;
+}
+h3 {
+font-size: 16px;
+}
+h4 {
+font-size: 14px;
+}
+h5 {
+font-size: 12px;
+}
+h6 {
+font-size: 11px;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code {
+font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+font-size: 12px;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+.select::-ms-expand {
+opacity: 0;
+}
+.octicon {
+font: normal normal normal 16px/1 octicons-link;
+display: inline-block;
+text-decoration: none;
+text-rendering: auto;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+.octicon-link:before {
+content: '\f05c';
+}
+.markdown-body:before {
+display: table;
+content: "";
+}
+.markdown-body:after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+display: inline-block;
+padding-right: 2px;
+margin-left: -18px;
+}
+.anchor:focus {
+outline: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1em;
+margin-bottom: 16px;
+font-weight: bold;
+line-height: 1.4;
+}
+h1 .octicon-link,
+h2 .octicon-link,
+h3 .octicon-link,
+h4 .octicon-link,
+h5 .octicon-link,
+h6 .octicon-link {
+color: #000;
+vertical-align: middle;
+visibility: hidden;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1:hover .anchor .octicon-link,
+h2:hover .anchor .octicon-link,
+h3:hover .anchor .octicon-link,
+h4:hover .anchor .octicon-link,
+h5:hover .anchor .octicon-link,
+h6:hover .anchor .octicon-link {
+visibility: visible;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2.25em;
+line-height: 1.2;
+border-bottom: 1px solid #eee;
+}
+h1 .anchor {
+line-height: 1;
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.75em;
+line-height: 1.225;
+border-bottom: 1px solid #eee;
+}
+h2 .anchor {
+line-height: 1;
+}
+h3 {
+font-size: 1.5em;
+line-height: 1.43;
+}
+h3 .anchor {
+line-height: 1.2;
+}
+h4 {
+font-size: 1.25em;
+}
+h4 .anchor {
+line-height: 1.2;
+}
+h5 {
+font-size: 1em;
+}
+h5 .anchor {
+line-height: 1.1;
+}
+h6 {
+font-size: 1em;
+color: #777;
+}
+h6 .anchor {
+line-height: 1.1;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 16px;
+}
+hr {
+height: 4px;
+padding: 0;
+margin: 16px 0;
+background-color: #e7e7e7;
+border: 0 none;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li>p {
+margin-top: 16px;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 16px;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 16px;
+margin-bottom: 16px;
+}
+blockquote {
+padding: 0 15px;
+color: #777;
+border-left: 4px solid #ddd;
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+word-break: normal;
+word-break: keep-all;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 6px 13px;
+border: 1px solid #ddd;
+}
+table tr {
+background-color: #fff;
+border-top: 1px solid #ccc;
+}
+table tr:nth-child(2n) {
+background-color: #f8f8f8;
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+background-color: #fff;
+}
+code {
+padding: 0;
+padding-top: 0.2em;
+padding-bottom: 0.2em;
+margin: 0;
+font-size: 85%;
+background-color: rgba(0,0,0,0.04);
+border-radius: 3px;
+}
+code:before,
+code:after {
+letter-spacing: -0.2em;
+content: "\00a0";
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 100%;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 16px;
+}
+.highlight pre,
+pre {
+padding: 16px;
+overflow: auto;
+font-size: 85%;
+line-height: 1.45;
+background-color: #f7f7f7;
+border-radius: 3px;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+pre {
+word-wrap: normal;
+}
+pre code {
+display: inline;
+max-width: initial;
+padding: 0;
+margin: 0;
+overflow: initial;
+line-height: inherit;
+word-wrap: normal;
+background-color: transparent;
+border: 0;
+}
+pre code:before,
+pre code:after {
+content: normal;
+}
+kbd {
+display: inline-block;
+padding: 3px 5px;
+font-size: 11px;
+line-height: 10px;
+color: #555;
+vertical-align: middle;
+background-color: #fcfcfc;
+border: solid 1px #ccc;
+border-bottom-color: #bbb;
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 #bbb;
+}
+.pl-c {
+color: #969896;
+}
+.pl-c1,
+.pl-s .pl-v {
+color: #0086b3;
+}
+.pl-e,
+.pl-en {
+color: #795da3;
+}
+.pl-s .pl-s1,
+.pl-smi {
+color: #333;
+}
+.pl-ent {
+color: #63a35c;
+}
+.pl-k {
+color: #a71d5d;
+}
+.pl-pds,
+.pl-s,
+.pl-s .pl-pse .pl-s1,
+.pl-sr,
+.pl-sr .pl-cce,
+.pl-sr .pl-sra,
+.pl-sr .pl-sre {
+color: #183691;
+}
+.pl-v {
+color: #ed6a43;
+}
+.pl-id {
+color: #b52a1d;
+}
+.pl-ii {
+background-color: #b52a1d;
+color: #f8f8f8;
+}
+.pl-sr .pl-cce {
+color: #63a35c;
+font-weight: bold;
+}
+.pl-ml {
+color: #693a17;
+}
+.pl-mh,
+.pl-mh .pl-en,
+.pl-ms {
+color: #1d3e81;
+font-weight: bold;
+}
+.pl-mq {
+color: #008080;
+}
+.pl-mi {
+color: #333;
+font-style: italic;
+}
+.pl-mb {
+color: #333;
+font-weight: bold;
+}
+.pl-md {
+background-color: #ffecec;
+color: #bd2c00;
+}
+.pl-mi1 {
+background-color: #eaffea;
+color: #55a532;
+}
+.pl-mdr {
+color: #795da3;
+font-weight: bold;
+}
+.pl-mo {
+color: #1d3e81;
+}
+kbd {
+display: inline-block;
+padding: 3px 5px;
+font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+line-height: 10px;
+color: #555;
+vertical-align: middle;
+background-color: #fcfcfc;
+border: solid 1px #ccc;
+border-bottom-color: #bbb;
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 #bbb;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 3px;
+}
+.task-list-item input {
+margin: 0 0.35em 0.25em -1.6em;
+vertical-align: middle;
+}
+:checked+.radio-label {
+z-index: 1;
+position: relative;
+border-color: #4078c0;
+}
+.sourceLine {
+display: inline-block;
+}
+code .kw { color: #000000; }
+code .dt { color: #ed6a43; }
+code .dv { color: #009999; }
+code .bn { color: #009999; }
+code .fl { color: #009999; }
+code .ch { color: #009999; }
+code .st { color: #183691; }
+code .co { color: #969896; }
+code .ot { color: #0086b3; }
+code .al { color: #a61717; }
+code .fu { color: #63a35c; }
+code .er { color: #a61717; background-color: #e3d2d2; }
+code .wa { color: #000000; }
+code .cn { color: #008080; }
+code .sc { color: #008080; }
+code .vs { color: #183691; }
+code .ss { color: #183691; }
+code .im { color: #000000; }
+code .va {color: #008080; }
+code .cf { color: #000000; }
+code .op { color: #000000; }
+code .bu { color: #000000; }
+code .ex { color: #000000; }
+code .pp { color: #999999; }
+code .at { color: #008080; }
+code .do { color: #969896; }
+code .an { color: #008080; }
+code .cv { color: #008080; }
+code .in { color: #008080; }
+</style>
+<style>
+body {
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 45px;
+  padding-top: 0px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1 id="running-r-non-interactively">Running R non-interactively</h1>
+<blockquote>
+<h3 id="learning-objectives">Learning Objectives:</h3>
+<ul>
+<li>Invoking and running R from the command line</li>
+<li>When to run R non-intereactively</li>
+<li>Invoking R from the command line</li>
+</ul>
+</blockquote>
+<hr />
+<p><strong>Pre-requisites:</strong> This tutorial assumes you are familiar with the command line and how to navigate your file-system.</p>
+<hr />
+<h2 id="interactive-vs-non-interactive-sessions">Interactive vs Non-Interactive Sessions</h2>
+<p>Most people working with R do so in <em>interactive mode</em>, either through RStudio (or another IDE), the console-based GUI, or perhaps R opened from the command line. In this mode, you type commands, and you get the outputs in return. In other words, you <strong>interact</strong> with R via its console, establishing a dialogue between you and R.</p>
+<p>Alternatively, you can also execute R in <strong>non-interactive</strong> mode, sometimes also referred to as <em>batch mode</em>. In this case, the computations are performed by executing scripts via the command line—without opening an R session.</p>
+<h3 id="why-use-non-interactive-mode">Why use non-interactive mode?</h3>
+<p>Interactive mode is usually the way you want to work when exploring a dataset for the first time, generating various plots to find the best visual display, calculating descriptive statistics that summarize the data, fitting various models to find the most appropriate parameters, and in general carrying out ad-hoc analyses and playing with new analysis ideas.</p>
+<p>Interactive mode is also useful when you are working in <em>developer mode</em>, that is, writing code for analysis, writing functions, creating an R package, working on a dynamic document, etc.</p>
+<p>As you become more and more familiar with a dataset, and as you advance in your analysis workflow, you’ll find yourself executing certain tasks over and over again. For instance, reading a table, subsetting part of it, calculating some numeric indices, and plotting a handful of graphics. These type of repetitive actions are good candidates to be encapsulated in a script that can be run without manual intervention. For this type of situations you can use R in non-interactive mode.</p>
+<p>Another typical situation for switching from interactive to non-interactive mode is when running simulations. Once the code of your simulations is ready, you can run the script from the command line, letting the computer do the work while you work on other tasks (or go out for a walk, drink a coffee, watch youtube, etc).</p>
+<p>Likewise, non-interactive mode is what you probably will be using when automating your analysis and/or generating reports (e.g. papers, thesis, dissertation).</p>
+<h3 id="what-is-an-interactive-session">What is an Interactive Session?</h3>
+<p>Let’s talk a bit about interactive sessions in general, regardless of the type of program you are using (e.g. R, python, matlab, julia).</p>
+<p>Interactive sessions prompt the user for input as data or commands. Typically, in an interactive session there is a software running on a computer environment and accepts input from human. This is the simplest way to work on any system—you enter commands and the software acts to each entry and then moves on to the next to create a sequence of events. The interactive session ends when you log off the system.</p>
+<h3 id="what-is-batch-processing">What is Batch Processing?</h3>
+<p><a href="https://en.wikipedia.org/wiki/Batch_processing">Batch processing</a>, also known as batch jobs, is the execution of one or more programs on a computer environment without manual intervention. Batch processing implies that all data and commands are passed through scripts and/or command-line parameters and therefore run to completion without human contact.</p>
+<p>The reason why this way of working is known as “batch processing” or “batch job” is because the input data are collected into batches of files and are processed in batches by the program. Often, batch jobs are submitted to a job scheduler and run on the first available compute node(s).</p>
+<hr />
+<h2 id="how-to-run-r-in-non-interactive-mode">How to Run R in Non-Interactive mode?</h2>
+<p>R can be run in non-interactive mode in several ways. All of them involve working from the command line or some terminal emulator. In Mac systems, you use the <strong>terminal</strong>. In Windows systems you use the <strong>command prompt</strong>, or <em>PowerShell</em>, or any other shell alternative (e.g. GitBash, Cygwin).</p>
+<p>Assuming that you have an R script file <code>myscript.R</code> that will be executed non-interactively, you can use one of the following options:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Using &#39;R CMD BATCH&#39; </span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="ex">R</span> CMD BATCH myscript.R</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># Using &#39;Rscript&#39;</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="ex">Rscript</span> myscript.R</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># Using input redirection</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="ex">R</span> <span class="op">&lt;</span> myscript.R</span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co"># Running a shell script</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="ex">./myscript.R</span></span></code></pre></div>
+<p>Each of these options are discussed in more detail in this tutorial. In this introduction, we will discuss some considerations about using and running scripts in a non-interactive way.</p>
+<h3 id="motivation">Motivation</h3>
+<p>Consider a stats professor that has a dataset with the information of a gradebook in one of her classes. For instance, the gradebook has variables for attendance, homework assignments, tests, and grade. Here’s what the data table could look like:</p>
+<table>
+<thead>
+<tr class="header">
+<th>id</th>
+<th>attend</th>
+<th>hw</th>
+<th>test1</th>
+<th>test2</th>
+<th>test3</th>
+<th>grade</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>36.84</td>
+<td>25.00</td>
+<td>70.00</td>
+<td>10.00</td>
+<td>32.65</td>
+<td>F</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>84.21</td>
+<td>87.50</td>
+<td>58.00</td>
+<td>49.00</td>
+<td>64.56</td>
+<td>D</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>94.74</td>
+<td>100.00</td>
+<td>86.00</td>
+<td>88.00</td>
+<td>90.90</td>
+<td>A</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>89.47</td>
+<td>100.00</td>
+<td>94.00</td>
+<td>90.00</td>
+<td>93.79</td>
+<td>A</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>94.74</td>
+<td>100.00</td>
+<td>54.00</td>
+<td>18.00</td>
+<td>56.90</td>
+<td>F</td>
+</tr>
+</tbody>
+</table>
+<p>The first time she explores the data, she will do so in interactive mode. Let’s say she already identified a couple of variables of interest. Likewise, she has generated dozens of plots and finally decided to keep one histogram, one barplot, and one scatter diagram. The professor will have to generate those plots on a regular basis, maybe every week or every time after a test has taken place.</p>
+<p>The professor has an R script <code>tests_histograms.R</code> that reads in the dataset containing the gradebook scores, selects the variables of the test scores, and plots histograms for each test; something like this:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># script to generate histograms of test&#39;s</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;gradebook.csv&#39;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a>test_columns &lt;-<span class="st"> </span><span class="kw">grep</span>(<span class="st">&#39;test&#39;</span>, <span class="kw">names</span>(dat))</span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(test_columns)) {</span>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="kw">png</span>(<span class="kw">paste0</span>(<span class="st">&#39;histogram_test&#39;</span>, i))</span>
+<span id="cb2-8"><a href="#cb2-8"></a>    <span class="kw">hist</span>(dat[ ,i], <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&#39;Test&#39;</span>, <span class="kw">names</span>(dat)[i]))</span>
+<span id="cb2-9"><a href="#cb2-9"></a>    <span class="kw">dev.off</span>()</span>
+<span id="cb2-10"><a href="#cb2-10"></a>}</span></code></pre></div>
+<p>Each time the professor needs a report, she could open RStudio, run the script from within RStudio, and get the plots. This is a repetitive task that can be automated. It would be better not to have to open RStudio, avoiding to manually run pieces of the script everytime.</p>
+<p>How can she “automate” this task? One way to run this script wihtout opening an interactive session, is using the <code>Rscript</code> command via the command line:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">Rscript</span> -e <span class="st">&#39;tests_histograms.R&#39;</span></span></code></pre></div>
+<p>This is much more efficient and convenient. We will discuss more options to run scripts non-interactively in the next sections of the tutorial.</p>
+<hr />
+<h3 id="windows-and-the-command-prompt">Windows and the command prompt</h3>
+<p>In Windows you can find the program <code>Command prompt</code> by clicking the <code>Start</code> button and selecting <code>All programs - Accessories</code>. After clicking on the <code>Command prompt</code> icon a new window will pop-up and you can start writing commands.</p>
+<p>When you install R on Windows, it comes with the <code>R.exe</code> file, which is an executable that will invoke R from the command line. However, if you type <code>R</code> in your command prompt, chances are that you will get an error message telling you that <code>R</code> is not a recognized command.</p>
+<p>Although R is installed on your computer, the system is not able to find the <code>R.exe</code> file. What happens is that <code>R.exe</code> is in a directory that is not part of the <em>default search path</em> of Windows. To solve this problem you have to change the search path so that it includes the path to the directory where <code>R.exe</code> is. To do so follow these steps:</p>
+<ol>
+<li><p>Open the <em>Control Panel</em>, choose <code>System</code>, click on <code>Advanced system settings</code> in the menue to the left and choose the <code>Environment variables</code> button.</p></li>
+<li><p>Choose the variable <code>Path</code> and click on the <code>Edit–button</code>. Now you have to edit <code>Variable value</code> so that it also contains the path to the directory where the various R binaries (programs) are installed.</p></li>
+<li><p>The path to this file is found in Windows explorer by looking for the directories were R was installed. Typically the path is something like <code>C:\Program Files\R\R-2.15.1\bin\x64</code> and it should be appended to the already existing path in <code>Variable value</code>.</p></li>
+<li><p>Note that the various paths in the search path as separated with a semi–colon so you should add an initial <code>;</code> to the string characters that you append to <code>Variable value</code>.</p></li>
+</ol>
+<p>In addition to <code>R.exe</code>, there are also two more versions: <code>Rcmd.exe</code> and <code>Rscript.exe</code>.</p>
+<h3 id="mac-and-command-line">Mac and command line</h3>
+<p>In Mac, you can find the <em>terminal</em> under the <code>Utilities</code> folder which is inside the <code>Applications</code> folder. If you are using the <em>Finder</em>, click on the folder <code>Applications</code>, and then click on <code>Utilities</code>. There you should be able to find a black screen icon called <strong>Terminal</strong>. Click on it and you will have a new window opened where you can start typing commands.</p>
+<p>Type <code>R</code> in the terminal to make sure that the systems knows where R is located.</p>
+<hr />
+
+</body>
+</html>
