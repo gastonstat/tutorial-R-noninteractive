@@ -3,15 +3,15 @@
 This tutorial is about how to execute R scripts in non-interactive mode;
 the covered topics are:
 
-- [Introduction](01-introduction.md)
+- [Introduction](documents/01-introduction.md)
 
-- [R CMD BATCH](02-batch-mode.md)
+- [R CMD BATCH](documents/02-batch-mode.md)
 
-- [Rscript](03-rscript.md)
+- [Rscript](documents/03-rscript.md)
 
-- [Shell script](04-shell-script.md)
+- [Shell script](documents/04-shell-script.md)
 
-- [Redirection](05-redirection.md)
+- [Redirection](documents/05-redirection.md)
 
 The [scripts](scripts) folder contain R script files, and output files, used in the 
 examples discussed in each section.
